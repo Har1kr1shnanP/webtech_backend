@@ -1,8 +1,10 @@
 import express from 'express';
 import { 
   addPatient, 
+  updatePatient,
   getAllPatients, 
   getPatientById, 
+  deletePatient,
   addTestForPatient, 
   getTestsForPatient, 
   getPatientHistory, 
@@ -109,6 +111,36 @@ router.post('/patients', addPatient);
  *                 $ref: '#/components/schemas/Patient'
  */
 router.get('/patients', getAllPatients);
+/**
+ * @swagger
+ * /api/patients/{id}:
+ *   put:
+ *     summary: Update patient details
+ *     tags: [Patients]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the patient to update
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Patient'
+ *     responses:
+ *       200:
+ *         description: Patient details updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Patient'
+ *       404:
+ *         description: Patient not found
+ */
+router.put('/patients/:id', updatePatient);
 
 /**
  * @swagger
@@ -152,6 +184,37 @@ router.get('/patients/critical', getCriticalPatients);
  *         description: Patient not found
  */
 router.get('/patients/:id', getPatientById);
+
+/**
+ * @swagger
+ * /api/patients/{id}:
+ *   delete:
+ *     summary: Delete a patient by ID
+ *     tags: [Patients]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the patient to delete
+ *     responses:
+ *       200:
+ *         description: Patient deleted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Success message
+ *                 deletedPatient:
+ *                   $ref: '#/components/schemas/Patient'
+ *       404:
+ *         description: Patient not found
+ */
+router.delete('/patients/:id', deletePatient);
 
 // Test-related routes
 
