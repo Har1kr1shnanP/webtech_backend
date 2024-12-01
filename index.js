@@ -27,7 +27,7 @@ const swaggerDefinition = {
     },
     servers: [
         {
-            url: `http://localhost:${process.env.PORT || 5000}`,
+            url: `http://localhost:${process.env.PORT || 6000}`,
         },
     ],
 };
@@ -48,7 +48,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use("/api", routes);
 
 // Environment variables
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 6000;
 const MONGO_URL = process.env.MONGO_URL;
 
 // Connect to MongoDB and start the server
